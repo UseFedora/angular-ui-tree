@@ -230,6 +230,9 @@
         };
 
         $scope.safeApply = function (fn) {
+          if (!this.$root) {
+            return this.$apply(fn());
+          }
           var phase = this.$root.$$phase;
           if (phase == '$apply' || phase == '$digest') {
             if (fn && (typeof (fn) === 'function')) {
